@@ -23,7 +23,7 @@ struct bullet_data
     //member function
     void calculate_velocity();
     void remove(vector<bullet_data> &bullets);
-    void check_collisions(vector<bullet_data> &bullets, vector<enemy_data> &enemies); //<<
+    bool check_collisions(vector<enemy_data> &enemies); //<<
 };
 
 //Initialize/construct the bullet data

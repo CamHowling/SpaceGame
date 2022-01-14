@@ -121,13 +121,16 @@ void enemy_data::calculate_velocity(point_2d &tarLocation)
 void enemy_data::remove(vector<enemy_data> & enemies)
 {
     int index = 0;
+    int indexFound;
     for (enemy_data enemy: enemies)
     {
         if (enemy.operator==(*this)){
-            enemies.erase(enemies.begin() + index);
+            indexFound = index;
+            break;
         }
         index++;
     }
+    enemies.erase(enemies.begin() + indexFound);
     delete this;
 }
 

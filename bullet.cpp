@@ -88,7 +88,11 @@ void update_all_bullets(vector<bullet_data> &bullets, vector<enemy_data> &enemie
 
 
         sprite_set_position(bullet.bullet_sprite, deltaPosPoint);
-        bullet.check_collisions(bullets, enemies); 
+        if(bullet.check_collisions(enemies))
+        {
+            write_line("remove bullet");
+            bullet.remove(bullets);
+        }
     }
 }
 
@@ -100,22 +104,26 @@ void draw_all_bullets(vector<bullet_data> &bullets)
     }
 }
 
-void bullet_data::check_collisions(vector<bullet_data> &bullets, vector<enemy_data> &enemies)
+bool bullet_data::check_collisions(vector<enemy_data> &enemies)
 {
+    vector<bullet_data> bullets_to_remove;
+    vector<bullet_data> enemies_to_remove;
     for (enemy_data enemy : enemies)
     {
         if(sprite_collision(this->bullet_sprite, enemy.enemy_sprite))
         {
             //Do collision stuff here
             enemy.remove(enemies);
-            this->remove(bullets);
+            return true;
         }
     }
+    return false;
 }
 
 void bullet_data::remove(vector<bullet_data> &bullets)
 {
     int index = 0;
+    int indexFound=0;
     // write_line("index val: " + to_string(index));
     for (bullet_data bullet : bullets)
     {
@@ -123,12 +131,16 @@ void bullet_data::remove(vector<bullet_data> &bullets)
         {
             write_line("index val: " + to_string(index));
             write_line("bullet vector length: " + to_string(bullets.size()));
-            bullets.erase(bullets.begin() + index);
-            write_line("erased bullet: " + to_string(index));
-            write_line("bullet vector length: " + to_string(bullets.size()));
+            indexFound = index;
+            break;      
         }
         index++;
     }
+    bullets.erase(bullets.begin() + indexFound);
+    
+    write_line("erased bullet: " + to_string(index));
+    write_line("bullet vector length: " + to_string(bullets.size()));
+
     delete this; 
 }
 
