@@ -106,7 +106,7 @@ int main()
         // int num = player.bullet_list.size();
         // draw_text("Number of bullets: " + to_string(num), COLOR_WHITE, 0, 30, option_to_screen());
 
-        // draw_text("Reload time: " + to_string(player.time_since_shot), COLOR_WHITE, 0, 50, option_to_screen());
+        //draw_text("Reload time: " + to_string(player.time_since_shot), COLOR_WHITE, 0, 50, option_to_screen());
 
         draw_text("Time: " + to_string(timeCounter), COLOR_WHITE, 0, 30, option_to_screen());
 
