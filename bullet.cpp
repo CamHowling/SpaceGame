@@ -106,8 +106,6 @@ void draw_all_bullets(vector<bullet_data> &bullets)
 
 bool bullet_data::check_collisions(vector<enemy_data> &enemies)
 {
-    vector<bullet_data> bullets_to_remove;
-    vector<bullet_data> enemies_to_remove;
     for (enemy_data enemy : enemies)
     {
         if(sprite_collision(this->bullet_sprite, enemy.enemy_sprite))
@@ -141,6 +139,10 @@ void bullet_data::remove(vector<bullet_data> &bullets)
     write_line("erased bullet: " + to_string(index));
     write_line("bullet vector length: " + to_string(bullets.size()));
 
-    delete this; 
+    // Delete this;
+    // need to deal with memory leak here
+    // pointer is deallocated automattically by going out of scope
+    // the data for the pointer is never nulled/deleted
+    // This needs to be allocated using malloc, the bullets are not in a data structure that currently uses pointers,
 }
 

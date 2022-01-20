@@ -60,12 +60,13 @@ int main()
 
     //Counter used to manage time based events
     float timeCounter = 0;
+    float deltaT;
 
     //Game loop - each refresh is called a Game Tick
     while ( not quit_requested() )
     {
         //before we process events
-        float deltaT = (float)1/60;
+        deltaT = (float)1/60;
         timeCounter = timeCounter + deltaT; 
 
         // Check inputs
@@ -73,6 +74,7 @@ int main()
         
         // Game updates and calculations
         update_player(player, activeEnemies);
+
         if (player.isDead == true)
         {
             GAMEOVER = true;
@@ -80,13 +82,6 @@ int main()
 
         update_enemy(activeEnemies);
         update_all_bullets(player.bullet_list, activeEnemies);
-
-        // Clear the screen, and redraw the sprites
-        clear_screen(COLOR_BLACK);       
-        draw_env(Background);
-        draw_enemy(activeEnemies); 
-        draw_player(player);
-        draw_all_bullets(player.bullet_list);
 
         //Spawner code
         if(spawner.spawn_enemy(timeCounter) && !GAMEOVER)
@@ -98,13 +93,23 @@ int main()
             activeEnemies.push_back(enemyObj);
         }
 
-        draw_UI(player);
+        // Clear the screen, and redraw the sprites
+        clear_screen(COLOR_BLACK);       
+        draw_env(Background);
+        draw_enemy(activeEnemies); 
+        draw_player(player);
+        draw_all_bullets(player.bullet_list);
 
         //Update UI text information
+        draw_UI(player);
+
         draw_text("Player Position: " + point_to_string(center_point(player.player_sprite)), COLOR_WHITE, 0, 10, option_to_screen());
 
-        // int num = player.bullet_list.size();
-        // draw_text("Number of bullets: " + to_string(num), COLOR_WHITE, 0, 30, option_to_screen());
+        int num = player.bullet_list.size();
+        draw_text("Number of bullets: " + to_string(num), COLOR_WHITE, 0, 70, option_to_screen());
+
+        int numE = activeEnemies.size();
+        draw_text("Number of enemies in array: " + to_string(numE), COLOR_WHITE, 0, 50, option_to_screen());
 
         //draw_text("Reload time: " + to_string(player.time_since_shot), COLOR_WHITE, 0, 50, option_to_screen());
 

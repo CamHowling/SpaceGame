@@ -131,7 +131,7 @@ void enemy_data::remove(vector<enemy_data> & enemies)
         index++;
     }
     enemies.erase(enemies.begin() + indexFound);
-    delete this;
+    //delete this; //Needs to be updated to use Malloc/Free or SharedPtrs.
 }
 
 spawner_data new_spawner(){
@@ -158,14 +158,13 @@ spawner_data new_spawner(){
 bool spawner_data::spawn_enemy(float &currentTime)
 {
     //previously previous spawn time and the spawn rate was higher than the current time 
-    if (currentTime >= (this->previousSpawnTime + this->spawnRate)) //This has been updated/Fixed, Current time has to be more than the previous time + spawn rate
+    if (currentTime >= (this->previousSpawnTime + this->spawnRate)) 
     {
         this->previousSpawnTime = currentTime;
         return true;
     }
     else
     {
-        // write_line("Curr Time: " + std::to_string(currentTime) + ", Spawn Progress: " + std::to_string(this->previousSpawnTime+this->spawnRate));
         return false;
     }
 }
