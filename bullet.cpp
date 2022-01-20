@@ -121,23 +121,17 @@ bool bullet_data::check_collisions(vector<enemy_data> &enemies)
 void bullet_data::remove(vector<bullet_data> &bullets)
 {
     int index = 0;
-    int indexFound=0;
-    // write_line("index val: " + to_string(index));
+    int indexFound = 0;
     for (bullet_data bullet : bullets)
     {
         if(bullet.operator==(*this))
         {
-            write_line("index val: " + to_string(index));
-            write_line("bullet vector length: " + to_string(bullets.size()));
             indexFound = index;
             break;      
         }
         index++;
     }
     bullets.erase(bullets.begin() + indexFound);
-    
-    write_line("erased bullet: " + to_string(index));
-    write_line("bullet vector length: " + to_string(bullets.size()));
 
     // Delete this;
     // need to deal with memory leak here

@@ -116,7 +116,7 @@ int main()
         draw_text("Time: " + to_string(timeCounter), COLOR_WHITE, 0, 30, option_to_screen());
 
         if(GAMEOVER){
-            draw_text("GAME OVER", COLOR_RED, "NORMAL_FONT",  1000, 500, 400.0, option_to_screen());
+            draw_text("GAME OVER", COLOR_RED, "NORMAL_FONT",  30, 500.0, 400.0, option_to_screen());
         }
 
         refresh_screen(60);

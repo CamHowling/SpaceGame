@@ -32,7 +32,7 @@ player_data new_player() //Factory function
 
     //UI section, Initial max health, and our health frame and bar components are created using the member functions
     player.health = MAX_PLAYER_HEALTH;
-    // player.health = 10;
+    player.health = 10;
     player.healthFrame = player.calc_healthFrame();
     player.healthBar = player.calc_healthBar(player.healthFrame);
     player.isDead = false;
